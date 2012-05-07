@@ -90,7 +90,7 @@ static UILazyImageViewCache * sharedCache;
 - (NSData*) getCachedImageDataForURL:(NSURL*)url{
     
     //Get filename
-    NSString * filePath = [self.fileDictionary objectForKey:url.absoluteURL];
+    NSString * filePath = [self.fileDictionary objectForKey:url.absoluteString];
     NSData * imageData = nil;
     
     //If it's not nil, get the data in that file
@@ -116,10 +116,8 @@ static UILazyImageViewCache * sharedCache;
         NSLog(@"UILazyImageViewCache: ERROR when creating file at %@", saveFilePath);
     }
     
-    NSLog(@"Saved file %@", saveFilePath);
-    
     //Save in dictionary
-    [self.fileDictionary setObject:saveFilePath forKey:url.absoluteURL];
+    [self.fileDictionary setObject:saveFilePath forKey:url.absoluteString];
 
 }
 
@@ -128,9 +126,26 @@ static UILazyImageViewCache * sharedCache;
     //Delete folder and create it again
     [self deleteImageStorageFolder];
     [self createImageStorageFolder];
+    //Remove all entryies in dictionary
+    [self.fileDictionary removeAllObjects];
 }
 
-
+- (void) clearsCacheEntryForURL:(NSURL*)url{
+    //Get file
+    NSString * filePath = [self.fileDictionary objectForKey:url.absoluteString];
+    //Remove entry for an specific URL
+    if (filePath){
+        
+        //Delete the main file
+        NSFileManager * fm = [NSFileManager defaultManager];
+        NSError * error = nil;
+        if (![fm removeItemAtPath:filePath error:&error]){
+            NSLog(@"UILazyImageViewCache: ERROR when deleting cache entry for %@ %@", filePath, error.description);
+        }
+        [self.fileDictionary removeObjectForKey:url.absoluteString];
+        
+    }
+}
 
 
 

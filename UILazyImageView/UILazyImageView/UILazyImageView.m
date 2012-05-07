@@ -23,26 +23,67 @@
 
 @interface UILazyImageView ()
 
+/**
+	The progress view to show up when the image is being downloaded
+ */
 @property (nonatomic,retain) UIProgressView * progressView;
+/**
+	The reload button to show up when the image download failed
+ */
 @property (nonatomic,retain) UIButton * reloadButton;
+/**
+	The main request to ask for the image data
+ */
 @property (nonatomic,retain) NSURLRequest * imageRequest;
+/**
+	The connection in charge of downloading the image data
+ */
 @property (nonatomic,retain) NSURLConnection * imageRequestConnection;
+/**
+	The cumulative data structure, at the end of the request, it will contain the full image data
+ */
 @property (nonatomic,retain) NSMutableData * downloadedImage;
+/**
+	The number of downloaded bytes
+ */
 @property (nonatomic,assign) NSUInteger downloadedByteCount;
+/**
+	The expected number of bytes to download for the request
+ */
 @property (nonatomic,assign) NSUInteger expectedByteCount;
 
+
+/**
+	Common init for all the init methods
+ */
 - (void) lazyImageViewInit;
+/**
+	This method cancels any previous connection, and starts a new download if the imageURL is not nil
+ */
 - (void) startDownloading;
+/**
+	This method is executed in the main thread when the connection fails the download
+ */
 - (void) downloadDidFail;
+/**
+	This method is executed in the main thread when the connection sucess the download
+ */
 - (void) downloadDidSuccess;
+/**
+	This method is executed in the main thread, it updates the progress bar value
+ */
 - (void) updateProgressBar;
 
 @end
 
 
+
+
+
+
+
 @implementation UILazyImageView
 @synthesize imageURL = _imageURL;
-
 @synthesize reloadButton = _reloadButton;
 @synthesize progressView = _progressView;
 @synthesize imageRequest = _imageRequest;
@@ -50,6 +91,10 @@
 @synthesize downloadedImage = _downloadedImage;
 @synthesize downloadedByteCount = _downloadedByteCount;
 @synthesize expectedByteCount = _expectedByteCount;
+
+
+
+#pragma mark - Init and Dealloc methods
 
 - (id) init{
     self = [super init];
@@ -90,6 +135,7 @@
     }
     return self;
 }
+
 
 - (void) lazyImageViewInit{
     //To avoid div by 0
@@ -137,6 +183,10 @@
 
 
 
+
+
+#pragma mark - Overrides
+
 - (void) setImageURL:(NSURL *)imageURL{
     [_imageURL release];
     _imageURL = nil;
@@ -144,15 +194,9 @@
     
     //Clear image
     self.image = nil;
-    //Get cached data
-    NSData * cachedData = [[UILazyImageViewCache sharedCache] getCachedImageDataForURL:imageURL];
-    if (!cachedData){
-        //Start new download
-        [self startDownloading];
-    }
-    else{
-        self.image = [UIImage imageWithData:cachedData];
-    }
+    //Start downloading
+    [self startDownloading];
+    
 }
 
 
@@ -179,8 +223,13 @@
 
 
 
+
+
+#pragma mark - Private methods
+
 - (void) startDownloading{
     if (self.imageURL){
+        
         //Reset progress bar
         self.downloadedByteCount = 0;
         self.expectedByteCount = 1;
@@ -196,9 +245,21 @@
         //Cancel previous request if needed
         [self.imageRequestConnection cancel];
         
-        //Start new request
-        self.imageRequest = [NSURLRequest requestWithURL:self.imageURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10.0];
-        self.imageRequestConnection = [NSURLConnection connectionWithRequest:self.imageRequest delegate:self];
+        //Get cached data
+        NSData * cachedData = [[UILazyImageViewCache sharedCache] getCachedImageDataForURL:self.imageURL];
+        //If we do not have cached data, start a request
+        if (!cachedData){
+            //Start new request
+            self.imageRequest = [NSURLRequest requestWithURL:self.imageURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60.0];
+            self.imageRequestConnection = [NSURLConnection connectionWithRequest:self.imageRequest delegate:self];
+        }
+        //If we have cached data,set as the download cache data, and success download
+        else{
+            self.downloadedImage = [NSMutableData dataWithData:cachedData];
+            [self downloadDidSuccess];
+        }
+        
+
     }
 }
 
@@ -218,14 +279,15 @@
     [self updateProgressBar];
     //Hide progress bar
     [self.progressView setHidden:YES];
-    //Update cache
-    [[UILazyImageViewCache sharedCache] updateCacheEntryForURL:self.imageURL withDownloadedData:self.downloadedImage];
 }
 
 
 - (void) updateProgressBar{
     [self.progressView setProgress: ((CGFloat)self.downloadedByteCount/(CGFloat)self.expectedByteCount)];
 }
+
+
+
 
 
 
@@ -263,6 +325,8 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{
     //Only continue if the connection is the same
     if (self.imageRequestConnection == connection){
+        //Update cache
+        [[UILazyImageViewCache sharedCache] updateCacheEntryForURL:self.imageURL withDownloadedData:self.downloadedImage];
         //Update UI
         [self performSelectorOnMainThread:@selector(downloadDidSuccess) withObject:nil waitUntilDone:YES];
     }
