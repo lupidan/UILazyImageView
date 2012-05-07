@@ -80,4 +80,19 @@
     [lazyImageView release];
     [super dealloc];
 }
+- (IBAction)button1Pressed:(id)sender {
+    [lazyImageView setImageURL:[NSURL URLWithString:@"http://www.beach-backgrounds.com/sunset-images/good-evening-ocean-side-beach-background-1920x1200.jpg"]];
+}
+
+- (IBAction)button2Pressed:(id)sender {
+    [lazyImageView setImageURL:[NSURL URLWithString:@"http://www.macwallpapers.eu/bulkupload//Trv/afric/3//Africa/Mac%20Tourism%20Background%20Zanzibar%20Beach.jpg"]];
+}
+
+- (IBAction)button3Pressed:(id)sender {
+    [lazyImageView setImageURL:[NSURL URLWithString:@"http://www.free-desktop-backgrounds.net/free-desktop-wallpapers-backgrounds/free-hd-desktop-wallpapers-backgrounds/619840535.jpg"]];
+}
+
+- (IBAction)button4Pressed:(id)sender {
+    [lazyImageView setImageURL:[NSURL URLWithString:@"http://www.pptbackgrounds.net/uploads/haena-beach-kauai-hawaii-backgrounds-wallpapers.jpg"]];
+}
 @end

@@ -24,4 +24,9 @@
 @interface ViewController : UIViewController
 @property (retain, nonatomic) IBOutlet UILazyImageView *lazyImageView;
 
+- (IBAction)button1Pressed:(id)sender;
+- (IBAction)button2Pressed:(id)sender;
+- (IBAction)button3Pressed:(id)sender;
+- (IBAction)button4Pressed:(id)sender;
+
 @end

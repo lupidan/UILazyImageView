@@ -91,6 +91,9 @@
 }
 
 - (void) lazyImageViewInit{
+    //To avoid div by 0
+    self.expectedByteCount = 1;
+    
     //Progress view
     UIProgressView * tempProgressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
     [tempProgressView setHidden:YES];
@@ -170,10 +173,15 @@
 
 - (void) startDownloading{
     if (self.imageURL){
+        //Reset progress bar
+        self.downloadedByteCount = 0;
+        self.expectedByteCount = 1;
         //Clear image
         [self setImage:nil];
         //Hide button
         [self.reloadButton setHidden:YES];
+        //Update progress bar
+        [self updateProgressBar];
         //Show progress bar
         [self.progressView setHidden:NO];
         
