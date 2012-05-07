@@ -19,6 +19,7 @@
  **/
 
 #import "UILazyImageView.h"
+#import "UILazyImageViewCache.h"
 
 @interface UILazyImageView ()
 
@@ -143,8 +144,15 @@
     
     //Clear image
     self.image = nil;
-    //Start new download
-    [self startDownloading];
+    //Get cached data
+    NSData * cachedData = [[UILazyImageViewCache sharedCache] getCachedImageDataForURL:imageURL];
+    if (!cachedData){
+        //Start new download
+        [self startDownloading];
+    }
+    else{
+        self.image = [UIImage imageWithData:cachedData];
+    }
 }
 
 
@@ -210,6 +218,8 @@
     [self updateProgressBar];
     //Hide progress bar
     [self.progressView setHidden:YES];
+    //Update cache
+    [[UILazyImageViewCache sharedCache] updateCacheEntryForURL:self.imageURL withDownloadedData:self.downloadedImage];
 }
 
 

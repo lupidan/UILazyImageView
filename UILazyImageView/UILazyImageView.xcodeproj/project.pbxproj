@@ -19,6 +19,7 @@
 		C2D9E3F41557BD6E0041B291 /* UILazyImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D9E3F31557BD6E0041B291 /* UILazyImageView.m */; };
 		C2D9E3F81558140A0041B291 /* uilazyimageview_reload.png in Resources */ = {isa = PBXBuildFile; fileRef = C2D9E3F61558140A0041B291 /* uilazyimageview_reload.png */; };
 		C2D9E3F91558140A0041B291 /* uilazyimageview_reload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2D9E3F71558140A0041B291 /* uilazyimageview_reload@2x.png */; };
+		C2D9E3FC1558392E0041B291 /* UILazyImageViewCache.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D9E3FB1558392D0041B291 /* UILazyImageViewCache.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,8 @@
 		C2D9E3F31557BD6E0041B291 /* UILazyImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILazyImageView.m; sourceTree = "<group>"; };
 		C2D9E3F61558140A0041B291 /* uilazyimageview_reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uilazyimageview_reload.png; sourceTree = "<group>"; };
 		C2D9E3F71558140A0041B291 /* uilazyimageview_reload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uilazyimageview_reload@2x.png"; sourceTree = "<group>"; };
+		C2D9E3FA1558392D0041B291 /* UILazyImageViewCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILazyImageViewCache.h; sourceTree = "<group>"; };
+		C2D9E3FB1558392D0041B291 /* UILazyImageViewCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILazyImageViewCache.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +99,8 @@
 				C2D9E3E71557BD3B0041B291 /* ViewController_iPhone.xib */,
 				C2D9E3EA1557BD3B0041B291 /* ViewController_iPad.xib */,
 				C2D9E3D91557BD3B0041B291 /* Supporting Files */,
+				C2D9E3FA1558392D0041B291 /* UILazyImageViewCache.h */,
+				C2D9E3FB1558392D0041B291 /* UILazyImageViewCache.m */,
 			);
 			path = UILazyImageView;
 			sourceTree = "<group>";
@@ -189,6 +194,7 @@
 				C2D9E3E31557BD3B0041B291 /* AppDelegate.m in Sources */,
 				C2D9E3E61557BD3B0041B291 /* ViewController.m in Sources */,
 				C2D9E3F41557BD6E0041B291 /* UILazyImageView.m in Sources */,
+				C2D9E3FC1558392E0041B291 /* UILazyImageViewCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
