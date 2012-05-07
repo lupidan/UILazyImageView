@@ -1,0 +1,301 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C2D9E3D31557BD3B0041B291 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2D9E3D21557BD3B0041B291 /* UIKit.framework */; };
+		C2D9E3D51557BD3B0041B291 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2D9E3D41557BD3B0041B291 /* Foundation.framework */; };
+		C2D9E3D71557BD3B0041B291 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2D9E3D61557BD3B0041B291 /* CoreGraphics.framework */; };
+		C2D9E3DD1557BD3B0041B291 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C2D9E3DB1557BD3B0041B291 /* InfoPlist.strings */; };
+		C2D9E3DF1557BD3B0041B291 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D9E3DE1557BD3B0041B291 /* main.m */; };
+		C2D9E3E31557BD3B0041B291 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D9E3E21557BD3B0041B291 /* AppDelegate.m */; };
+		C2D9E3E61557BD3B0041B291 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D9E3E51557BD3B0041B291 /* ViewController.m */; };
+		C2D9E3E91557BD3B0041B291 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2D9E3E71557BD3B0041B291 /* ViewController_iPhone.xib */; };
+		C2D9E3EC1557BD3B0041B291 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2D9E3EA1557BD3B0041B291 /* ViewController_iPad.xib */; };
+		C2D9E3F41557BD6E0041B291 /* UILazyImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D9E3F31557BD6E0041B291 /* UILazyImageView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C2D9E3CE1557BD3B0041B291 /* UILazyImageView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UILazyImageView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2D9E3D21557BD3B0041B291 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C2D9E3D41557BD3B0041B291 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C2D9E3D61557BD3B0041B291 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C2D9E3DA1557BD3B0041B291 /* UILazyImageView-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UILazyImageView-Info.plist"; sourceTree = "<group>"; };
+		C2D9E3DC1557BD3B0041B291 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C2D9E3DE1557BD3B0041B291 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C2D9E3E01557BD3B0041B291 /* UILazyImageView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILazyImageView-Prefix.pch"; sourceTree = "<group>"; };
+		C2D9E3E11557BD3B0041B291 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		C2D9E3E21557BD3B0041B291 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		C2D9E3E41557BD3B0041B291 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		C2D9E3E51557BD3B0041B291 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		C2D9E3E81557BD3B0041B291 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
+		C2D9E3EB1557BD3B0041B291 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
+		C2D9E3F21557BD6E0041B291 /* UILazyImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILazyImageView.h; sourceTree = "<group>"; };
+		C2D9E3F31557BD6E0041B291 /* UILazyImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILazyImageView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C2D9E3CB1557BD3B0041B291 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2D9E3D31557BD3B0041B291 /* UIKit.framework in Frameworks */,
+				C2D9E3D51557BD3B0041B291 /* Foundation.framework in Frameworks */,
+				C2D9E3D71557BD3B0041B291 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C2D9E3C31557BD3B0041B291 = {
+			isa = PBXGroup;
+			children = (
+				C2D9E3D81557BD3B0041B291 /* UILazyImageView */,
+				C2D9E3D11557BD3B0041B291 /* Frameworks */,
+				C2D9E3CF1557BD3B0041B291 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C2D9E3CF1557BD3B0041B291 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C2D9E3CE1557BD3B0041B291 /* UILazyImageView.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C2D9E3D11557BD3B0041B291 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C2D9E3D21557BD3B0041B291 /* UIKit.framework */,
+				C2D9E3D41557BD3B0041B291 /* Foundation.framework */,
+				C2D9E3D61557BD3B0041B291 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C2D9E3D81557BD3B0041B291 /* UILazyImageView */ = {
+			isa = PBXGroup;
+			children = (
+				C2D9E3F21557BD6E0041B291 /* UILazyImageView.h */,
+				C2D9E3F31557BD6E0041B291 /* UILazyImageView.m */,
+				C2D9E3E11557BD3B0041B291 /* AppDelegate.h */,
+				C2D9E3E21557BD3B0041B291 /* AppDelegate.m */,
+				C2D9E3E41557BD3B0041B291 /* ViewController.h */,
+				C2D9E3E51557BD3B0041B291 /* ViewController.m */,
+				C2D9E3E71557BD3B0041B291 /* ViewController_iPhone.xib */,
+				C2D9E3EA1557BD3B0041B291 /* ViewController_iPad.xib */,
+				C2D9E3D91557BD3B0041B291 /* Supporting Files */,
+			);
+			path = UILazyImageView;
+			sourceTree = "<group>";
+		};
+		C2D9E3D91557BD3B0041B291 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C2D9E3DA1557BD3B0041B291 /* UILazyImageView-Info.plist */,
+				C2D9E3DB1557BD3B0041B291 /* InfoPlist.strings */,
+				C2D9E3DE1557BD3B0041B291 /* main.m */,
+				C2D9E3E01557BD3B0041B291 /* UILazyImageView-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C2D9E3CD1557BD3B0041B291 /* UILazyImageView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C2D9E3EF1557BD3B0041B291 /* Build configuration list for PBXNativeTarget "UILazyImageView" */;
+			buildPhases = (
+				C2D9E3CA1557BD3B0041B291 /* Sources */,
+				C2D9E3CB1557BD3B0041B291 /* Frameworks */,
+				C2D9E3CC1557BD3B0041B291 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UILazyImageView;
+			productName = UILazyImageView;
+			productReference = C2D9E3CE1557BD3B0041B291 /* UILazyImageView.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C2D9E3C51557BD3B0041B291 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = C2D9E3C81557BD3B0041B291 /* Build configuration list for PBXProject "UILazyImageView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C2D9E3C31557BD3B0041B291;
+			productRefGroup = C2D9E3CF1557BD3B0041B291 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C2D9E3CD1557BD3B0041B291 /* UILazyImageView */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C2D9E3CC1557BD3B0041B291 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2D9E3DD1557BD3B0041B291 /* InfoPlist.strings in Resources */,
+				C2D9E3E91557BD3B0041B291 /* ViewController_iPhone.xib in Resources */,
+				C2D9E3EC1557BD3B0041B291 /* ViewController_iPad.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C2D9E3CA1557BD3B0041B291 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2D9E3DF1557BD3B0041B291 /* main.m in Sources */,
+				C2D9E3E31557BD3B0041B291 /* AppDelegate.m in Sources */,
+				C2D9E3E61557BD3B0041B291 /* ViewController.m in Sources */,
+				C2D9E3F41557BD6E0041B291 /* UILazyImageView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C2D9E3DB1557BD3B0041B291 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C2D9E3DC1557BD3B0041B291 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C2D9E3E71557BD3B0041B291 /* ViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C2D9E3E81557BD3B0041B291 /* en */,
+			);
+			name = ViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		C2D9E3EA1557BD3B0041B291 /* ViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C2D9E3EB1557BD3B0041B291 /* en */,
+			);
+			name = ViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C2D9E3ED1557BD3B0041B291 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C2D9E3EE1557BD3B0041B291 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C2D9E3F01557BD3B0041B291 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UILazyImageView/UILazyImageView-Prefix.pch";
+				INFOPLIST_FILE = "UILazyImageView/UILazyImageView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C2D9E3F11557BD3B0041B291 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UILazyImageView/UILazyImageView-Prefix.pch";
+				INFOPLIST_FILE = "UILazyImageView/UILazyImageView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C2D9E3C81557BD3B0041B291 /* Build configuration list for PBXProject "UILazyImageView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C2D9E3ED1557BD3B0041B291 /* Debug */,
+				C2D9E3EE1557BD3B0041B291 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C2D9E3EF1557BD3B0041B291 /* Build configuration list for PBXNativeTarget "UILazyImageView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C2D9E3F01557BD3B0041B291 /* Debug */,
+				C2D9E3F11557BD3B0041B291 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C2D9E3C51557BD3B0041B291 /* Project object */;
+}
