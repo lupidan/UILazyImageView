@@ -23,6 +23,7 @@
 @interface UILazyImageView ()
 
 @property (nonatomic,retain) UIProgressView * progressView;
+@property (nonatomic,retain) UIButton * reloadButton;
 @property (nonatomic,retain) NSURLRequest * imageRequest;
 @property (nonatomic,retain) NSURLConnection * imageRequestConnection;
 @property (nonatomic,retain) NSMutableData * downloadedImage;
@@ -41,6 +42,7 @@
 @implementation UILazyImageView
 @synthesize imageURL = _imageURL;
 
+@synthesize reloadButton = _reloadButton;
 @synthesize progressView = _progressView;
 @synthesize imageRequest = _imageRequest;
 @synthesize imageRequestConnection = _imageRequestConnection;
@@ -89,11 +91,32 @@
 }
 
 - (void) lazyImageViewInit{
-    self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+    //Progress view
+    UIProgressView * tempProgressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+    [tempProgressView setHidden:YES];
+    self.progressView = tempProgressView;
+    [tempProgressView release];
+    
+    //Button
+    self.reloadButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage * reloadImage = [UIImage imageNamed:@"uilazyimageview_reload.png"];
+    self.reloadButton.frame = CGRectMake(0.0, 0.0, reloadImage.size.width, reloadImage.size.height);
+    [self.reloadButton setImage:reloadImage forState:UIControlStateNormal];
+    [self.reloadButton setHidden:YES];
+    
+    //Add to view
     [self addSubview:self.progressView];
+    [self addSubview:self.reloadButton];
 }
 
 - (void) dealloc{
+    [_imageURL release];
+    [_progressView release];
+    [_reloadButton release];
+    [_imageRequest release];
+    [_imageRequestConnection release];
+    [_downloadedImage release];
+    
     [super dealloc];
 }
 
@@ -117,20 +140,19 @@
 }
 
 
-- (void) setFrame:(CGRect)frame{
-    [super setFrame:frame];
+- (void) layoutSubviews{
+    [super layoutSubviews];
     
     //Set frame of progress view
     CGFloat rightMargin = 20.0;
     CGFloat leftMargin = 20.0;
-    CGFloat width = frame.size.width - leftMargin - rightMargin;
+    CGFloat width = self.frame.size.width - leftMargin - rightMargin;
     CGFloat height = 10.0;
     CGFloat yPos = self.center.y - (height / 2.0);
     if (width < 0)
         width = 0;
     
     self.progressView.frame = CGRectMake(leftMargin, yPos, width, height);
-    
 }
 
 
@@ -203,9 +225,16 @@
     }
 }
 
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse{
-    return cachedResponse;
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
+    //Only continue if the connection is the same one
+    if (self.imageRequestConnection == connection){
+        //Image is nil
+        [self setImage:nil];
+        //Hide progress bar
+        [self performSelectorOnMainThread:@selector(hideProgressBar) withObject:nil waitUntilDone:YES];
+    }
 }
+
 
 
 
