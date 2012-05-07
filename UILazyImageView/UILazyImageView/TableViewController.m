@@ -1,22 +1,50 @@
-//
-//  TableViewController.m
-//  UILazyImageView
-//
-//  Created by Daniel Lupiañez Casares on 07/05/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+/**
+ * UILazyImageView
+ *
+ * Copyright 2012 Daniel Lupiañez Casares <lupidan@gmail.com>
+ * 
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either 
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public 
+ * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ **/
 
 #import "TableViewController.h"
+#import "UILazyImageView.h"
 
 @implementation TableViewController
+@synthesize arrayOfImageURL;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+
     }
     return self;
+    
+
+}
+
+- (void) viewDidLoad{
+    [super viewDidLoad];
+    self.arrayOfImageURL = [NSArray arrayWithObjects:@"http://www.beach-backgrounds.com/sunset-images/good-evening-ocean-side-beach-background-1920x1200.jpg",
+                            @"http://www.macwallpapers.eu/bulkupload//Trv/afric/3//Africa/Mac%20Tourism%20Background%20Zanzibar%20Beach.jpg",
+                            @"http://www.free-desktop-backgrounds.net/free-desktop-wallpapers-backgrounds/free-hd-desktop-wallpapers-backgrounds/619840535.jpg",
+                            @"http://www.pptbackgrounds.net/uploads/haena-beach-kauai-hawaii-backgrounds-wallpapers.jpg",
+                            @"http://2.bp.blogspot.com/-C4lhV_kw0eo/TjblAkw_ROI/AAAAAAAAAgM/Fp-MUs149TQ/s1600/beach_chair_dl.jpg",
+                            @"http://cooldesktopbackgroundsx.com/wp-content/uploads/2010/07/Paradise-Beach.jpeg",
+                            @"http://wallpaperskd.com/wp-content/uploads/2012/03/summer-beach-background-nature.jpg",
+                            @"http://www.profilethai.com/download/original/green-bottle-on-sandy-beach-wallpaper-1920x1200.jpg",nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -27,45 +55,14 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void) dealloc{
+    [arrayOfImageURL release];
+    [super dealloc];
+}
+
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -75,18 +72,11 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return self.arrayOfImageURL.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -96,64 +86,24 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        
+        UILazyImageView * lazyImage = [[[UILazyImageView alloc] initWithFrame:cell.bounds] autorelease];
+        lazyImage.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+        [cell addSubview:lazyImage];
     }
     
-    // Configure the cell...
+    for (UIView * view in cell.subviews){
+        if ([view isKindOfClass:[UILazyImageView class]]){
+            UILazyImageView * imageView = (UILazyImageView*)view;
+            imageView.imageURL = [NSURL URLWithString:[self.arrayOfImageURL objectAtIndex:indexPath.row]];
+        }
+    }
     
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 150.0;
 }
 
 @end

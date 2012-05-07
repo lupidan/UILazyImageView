@@ -19,15 +19,31 @@
  **/
 
 #import "UILazyImageViewCache.h"
-
+#import "NSData+HashMD5.h"
 
 @interface UILazyImageViewCache ()
 
+/**
+	This dictionary contains the cached files present in the tmp directory
+ */
 @property (nonatomic,retain) NSMutableDictionary * fileDictionary;
+
+/**
+	This string contains the root directory for storing the images
+ */
 @property (nonatomic,retain) NSString * imageStorageRoot;
 
+
+/**
+	Delete main tmp folder
+ */
 - (void) deleteImageStorageFolder;
+
+/**
+	Create main tmp folder
+ */
 - (void) createImageStorageFolder;
+
 
 @end
 
@@ -37,14 +53,26 @@
 @synthesize fileDictionary = _fileDictionary;
 @synthesize imageStorageRoot = _imageStorageRoot;
 
+#pragma mark - Class methods
+
 static UILazyImageViewCache * sharedCache;
 
++ (void) initialize{
+    sharedCache = [[UILazyImageViewCache alloc] init];
+}
+
 + (UILazyImageViewCache*) sharedCache{
-    if (!sharedCache)
-        sharedCache = [[UILazyImageViewCache alloc] init];
-    
     return sharedCache;
 }
+
+
+
+
+
+
+
+
+
 
 
 - (id) init{
@@ -53,6 +81,7 @@ static UILazyImageViewCache * sharedCache;
         self.fileDictionary = [NSMutableDictionary dictionary];
         self.imageStorageRoot = [NSString stringWithFormat:@"%@lazyImageViewCache",NSTemporaryDirectory()];
         [self clearCache];
+        //NSLog(@"TMP: %@", self.imageStorageRoot);
     }
     return self;
 }
@@ -87,6 +116,8 @@ static UILazyImageViewCache * sharedCache;
 
 
 
+
+
 - (NSData*) getCachedImageDataForURL:(NSURL*)url{
     
     //Get filename
@@ -106,8 +137,11 @@ static UILazyImageViewCache * sharedCache;
 
 - (void) updateCacheEntryForURL:(NSURL*)url withDownloadedData:(NSData*)data{
     
-    //Prepares filename
-    NSString * saveFilename = [NSString stringWithFormat:@"%d",[data hash]];
+    //The url string as a data object
+    NSData * urlStringData = [url.absoluteString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    //Prepares filename with URL Hash MD5 and data hash MD5
+    NSString * saveFilename = [NSString stringWithFormat:@"%@%@",[urlStringData hashMD5String],[data hashMD5String]];
     NSString * saveFilePath = [NSString stringWithFormat:@"%@/%@", self.imageStorageRoot, saveFilename];
     
     //Create file

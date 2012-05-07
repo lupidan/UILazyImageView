@@ -17,11 +17,11 @@
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  * 
  **/
+#import <Foundation/Foundation.h>
 
-#import <UIKit/UIKit.h>
+@interface NSData (HashMD5)
 
-@interface TableViewController : UITableViewController
-
-@property (nonatomic,retain) NSArray * arrayOfImageURL;
++ (NSString*) hashMD5StringFromData:(NSData*)data;
+- (NSString*) hashMD5String;
 
 @end

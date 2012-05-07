@@ -21,16 +21,19 @@
 #import "AppDelegate.h"
 
 #import "ViewController.h"
+#import "TableViewController.h"
 
 @implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize viewController = _viewController;
+@synthesize tableViewController = _tableViewController;
 
 - (void)dealloc
 {
     [_window release];
     [_viewController release];
+    [_tableViewController release];
     [super dealloc];
 }
 
@@ -38,12 +41,15 @@
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil] autorelease];
-    } else {
-        self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil] autorelease];
-    }
-    self.window.rootViewController = self.viewController;
+    self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController" bundle:nil] autorelease];
+    self.viewController.title = @"Single Image";
+    self.tableViewController = [[[TableViewController alloc] initWithNibName:@"TableViewController" bundle:[NSBundle mainBundle]] autorelease];
+    self.tableViewController.title = @"Table";
+    
+    UITabBarController * tabBarController = [[[UITabBarController alloc] init] autorelease];
+    tabBarController.viewControllers = [NSArray arrayWithObjects:self.tableViewController, self.viewController, nil];
+    
+    self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];
     return YES;
 }

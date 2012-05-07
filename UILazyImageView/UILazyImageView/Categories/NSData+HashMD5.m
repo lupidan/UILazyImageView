@@ -18,10 +18,28 @@
  * 
  **/
 
-#import <UIKit/UIKit.h>
+#import "NSData+HashMD5.h"
+#import <CommonCrypto/CommonDigest.h>
 
-@interface TableViewController : UITableViewController
+@implementation NSData (HashMD5)
 
-@property (nonatomic,retain) NSArray * arrayOfImageURL;
++ (NSString*) hashMD5StringFromData:(NSData*)data{
+    return [data hashMD5String];
+}
+
+- (NSString*) hashMD5String{
+    
+    //Get the MD5 hash for the data
+    unsigned char hashChar [CC_MD5_DIGEST_LENGTH];
+    CC_MD5(self.bytes, self.length, hashChar);
+    NSMutableString * hashMutable = [NSMutableString string];
+    for (int i=0; i < CC_MD5_DIGEST_LENGTH; i++){
+        [hashMutable appendFormat:@"%02X", hashChar[i]];
+    }
+    return [NSString stringWithString:hashMutable];
+    
+}
+
+
 
 @end

@@ -20,8 +20,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TableViewController : UITableViewController
+/**
+	This class works as a normal UIImageView, but offers also the possibility to load images from the internet asynchronously.
+    It needs an extra class, UILazyImageViewCache, in order to optimize the cache use
+ */
+@interface UILazyImageView : UIImageView <NSURLConnectionDataDelegate>
 
-@property (nonatomic,retain) NSArray * arrayOfImageURL;
+/**
+	Set this image URL member to start downloading the image from the web
+ */
+@property (nonatomic,retain) NSURL * imageURL;
+
 
 @end

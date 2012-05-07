@@ -23,6 +23,7 @@
 
 @interface UILazyImageView ()
 
+
 /**
 	The progress view to show up when the image is being downloaded
  */
@@ -74,6 +75,12 @@
  */
 - (void) updateProgressBar;
 
+/**
+	Starts loading the data in the background thread by attempting to get the data from cache. If not cached, download starts in main thread
+ */
+- (void) loadDataInBackground;
+
+
 @end
 
 
@@ -83,6 +90,9 @@
 
 
 @implementation UILazyImageView
+
+
+
 @synthesize imageURL = _imageURL;
 @synthesize reloadButton = _reloadButton;
 @synthesize progressView = _progressView;
@@ -194,10 +204,29 @@
     
     //Clear image
     self.image = nil;
-    //Start downloading
-    [self startDownloading];
+    //If we have a new image URL
+    if (self.imageURL){
+        
+        //Reset progress bar
+        self.downloadedByteCount = 0;
+        self.expectedByteCount = 1;
+        //Hide button
+        [self.reloadButton setHidden:YES];
+        //Update progress bar
+        [self updateProgressBar];
+        //Show progress bar
+        [self.progressView setHidden:NO];
+        //Cancel previous request if needed
+        [self.imageRequestConnection cancel];
+        //Load data in background
+        [self performSelectorInBackground:@selector(loadDataInBackground) withObject:nil];
+        
+        
+    }
     
 }
+
+
 
 
 - (void) layoutSubviews{
@@ -228,39 +257,11 @@
 #pragma mark - Private methods
 
 - (void) startDownloading{
-    if (self.imageURL){
-        
-        //Reset progress bar
-        self.downloadedByteCount = 0;
-        self.expectedByteCount = 1;
-        //Clear image
-        [self setImage:nil];
-        //Hide button
-        [self.reloadButton setHidden:YES];
-        //Update progress bar
-        [self updateProgressBar];
-        //Show progress bar
-        [self.progressView setHidden:NO];
-        
-        //Cancel previous request if needed
-        [self.imageRequestConnection cancel];
-        
-        //Get cached data
-        NSData * cachedData = [[UILazyImageViewCache sharedCache] getCachedImageDataForURL:self.imageURL];
-        //If we do not have cached data, start a request
-        if (!cachedData){
-            //Start new request
-            self.imageRequest = [NSURLRequest requestWithURL:self.imageURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60.0];
-            self.imageRequestConnection = [NSURLConnection connectionWithRequest:self.imageRequest delegate:self];
-        }
-        //If we have cached data,set as the download cache data, and success download
-        else{
-            self.downloadedImage = [NSMutableData dataWithData:cachedData];
-            [self downloadDidSuccess];
-        }
-        
-
-    }
+    
+    //Start new request
+    self.imageRequest = [NSURLRequest requestWithURL:self.imageURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:60.0];
+    self.imageRequestConnection = [NSURLConnection connectionWithRequest:self.imageRequest delegate:self];
+    
 }
 
 - (void) downloadDidFail{
@@ -279,6 +280,8 @@
     [self updateProgressBar];
     //Hide progress bar
     [self.progressView setHidden:YES];
+    //Hide progress bar
+    [self.reloadButton setHidden:YES];
 }
 
 
@@ -287,7 +290,25 @@
 }
 
 
-
+- (void) loadDataInBackground{
+    
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    
+    //Get cached data in background
+    NSData * cachedData = [[UILazyImageViewCache sharedCache] getCachedImageDataForURL:self.imageURL];
+    //If we don't have cached data, start downloading
+    if (!cachedData){
+        [self performSelectorOnMainThread:@selector(startDownloading) withObject:nil waitUntilDone:YES];
+    }
+    //Else, if we have cached data, set as main
+    else{
+        self.downloadedImage = [NSMutableData dataWithData:cachedData];
+        [self performSelectorOnMainThread:@selector(downloadDidSuccess) withObject:nil waitUntilDone:YES];
+    }
+    
+    [pool drain];
+    
+}
 
 
 
