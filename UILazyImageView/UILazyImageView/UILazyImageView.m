@@ -32,9 +32,9 @@
 
 - (void) lazyImageViewInit;
 - (void) startDownloading;
+- (void) downloadDidFail;
+- (void) downloadDidSuccess;
 - (void) updateProgressBar;
-- (void) showProgressBar;
-- (void) hideProgressBar;
 
 @end
 
@@ -103,10 +103,15 @@
     self.reloadButton.frame = CGRectMake(0.0, 0.0, reloadImage.size.width, reloadImage.size.height);
     [self.reloadButton setImage:reloadImage forState:UIControlStateNormal];
     [self.reloadButton setHidden:YES];
+    [self.reloadButton addTarget:self action:@selector(startDownloading) forControlEvents:UIControlEventTouchUpInside];
     
     //Add to view
     [self addSubview:self.progressView];
     [self addSubview:self.reloadButton];
+    
+    //Set view interaction
+    [self setUserInteractionEnabled:YES];
+    
 }
 
 - (void) dealloc{
@@ -151,20 +156,52 @@
     CGFloat yPos = self.center.y - (height / 2.0);
     if (width < 0)
         width = 0;
-    
     self.progressView.frame = CGRectMake(leftMargin, yPos, width, height);
+    
+    //Set frame of reload button
+    CGRect buttonRect = self.reloadButton.frame;
+    buttonRect.origin.x = 20.0;
+    buttonRect.origin.y = 20.0;
+    self.reloadButton.frame = buttonRect;
+    
 }
 
 
 
 - (void) startDownloading{
     if (self.imageURL){
+        //Clear image
+        [self setImage:nil];
+        //Hide button
+        [self.reloadButton setHidden:YES];
+        //Show progress bar
+        [self.progressView setHidden:NO];
+        
         //Cancel previous request if needed
         [self.imageRequestConnection cancel];
+        
         //Start new request
         self.imageRequest = [NSURLRequest requestWithURL:self.imageURL cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:10.0];
         self.imageRequestConnection = [NSURLConnection connectionWithRequest:self.imageRequest delegate:self];
     }
+}
+
+- (void) downloadDidFail{
+    //Clear image
+    [self setImage:nil];
+    //Show button
+    [self.reloadButton setHidden:NO];
+    //Hide progress bar
+    [self.progressView setHidden:NO];
+}
+
+- (void) downloadDidSuccess{
+    //Image was donwloaded, so set new image
+    self.image = [UIImage imageWithData:self.downloadedImage];
+    //Update progres bar
+    [self updateProgressBar];
+    //Hide progress bar
+    [self.progressView setHidden:YES];
 }
 
 
@@ -172,15 +209,9 @@
     [self.progressView setProgress: ((CGFloat)self.downloadedByteCount/(CGFloat)self.expectedByteCount)];
 }
 
-- (void) showProgressBar{
-    //Hide progress bar
-    [self.progressView setHidden:NO];
-}
 
-- (void) hideProgressBar{
-    //Hide progress bar
-    [self.progressView setHidden:YES];
-}
+
+
 
 
 #pragma mark - Url Connection Data Delegate
@@ -195,9 +226,6 @@
         //Keep the number of bytes we are going to receive, and reset the counter
         self.expectedByteCount = [response expectedContentLength];
         self.downloadedByteCount = 0;
-        //Update progress bar in main thread
-        [self performSelectorOnMainThread:@selector(updateProgressBar) withObject:nil waitUntilDone:YES];
-        [self performSelectorOnMainThread:@selector(showProgressBar) withObject:nil waitUntilDone:YES];
     }
 }
 
@@ -217,21 +245,16 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection{
     //Only continue if the connection is the same
     if (self.imageRequestConnection == connection){
-        //Image was donwloaded, so set new image
-        self.image = [UIImage imageWithData:self.downloadedImage];
-        //Update progress bar in front view
-        [self performSelectorOnMainThread:@selector(updateProgressBar) withObject:nil waitUntilDone:YES];
-        [self performSelectorOnMainThread:@selector(hideProgressBar) withObject:nil waitUntilDone:YES];
+        //Update UI
+        [self performSelectorOnMainThread:@selector(downloadDidSuccess) withObject:nil waitUntilDone:YES];
     }
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
     //Only continue if the connection is the same one
     if (self.imageRequestConnection == connection){
-        //Image is nil
-        [self setImage:nil];
         //Hide progress bar
-        [self performSelectorOnMainThread:@selector(hideProgressBar) withObject:nil waitUntilDone:YES];
+        [self performSelectorOnMainThread:@selector(downloadDidFail) withObject:nil waitUntilDone:YES];
     }
 }
 
