@@ -19,9 +19,6 @@
 		C2D9E40115584DE50041B291 /* TableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2D9E3FF15584DE50041B291 /* TableViewController.xib */; };
 		C2D9E405155877050041B291 /* NSData+HashMD5.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D9E404155877050041B291 /* NSData+HashMD5.m */; };
 		C2D9E40D15587D0C0041B291 /* UILazyImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D9E40815587D0C0041B291 /* UILazyImageView.m */; };
-		C2D9E40E15587D0C0041B291 /* uilazyimageview_reload.png in Resources */ = {isa = PBXBuildFile; fileRef = C2D9E40915587D0C0041B291 /* uilazyimageview_reload.png */; };
-		C2D9E40F15587D0C0041B291 /* uilazyimageview_reload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C2D9E40A15587D0C0041B291 /* uilazyimageview_reload@2x.png */; };
-		C2D9E41015587D0C0041B291 /* UILazyImageViewCache.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D9E40C15587D0C0041B291 /* UILazyImageViewCache.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,10 +42,6 @@
 		C2D9E404155877050041B291 /* NSData+HashMD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+HashMD5.m"; sourceTree = "<group>"; };
 		C2D9E40715587D0C0041B291 /* UILazyImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILazyImageView.h; sourceTree = "<group>"; };
 		C2D9E40815587D0C0041B291 /* UILazyImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILazyImageView.m; sourceTree = "<group>"; };
-		C2D9E40915587D0C0041B291 /* uilazyimageview_reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uilazyimageview_reload.png; sourceTree = "<group>"; };
-		C2D9E40A15587D0C0041B291 /* uilazyimageview_reload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uilazyimageview_reload@2x.png"; sourceTree = "<group>"; };
-		C2D9E40B15587D0C0041B291 /* UILazyImageViewCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILazyImageViewCache.h; sourceTree = "<group>"; };
-		C2D9E40C15587D0C0041B291 /* UILazyImageViewCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILazyImageViewCache.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,10 +128,6 @@
 			children = (
 				C2D9E40715587D0C0041B291 /* UILazyImageView.h */,
 				C2D9E40815587D0C0041B291 /* UILazyImageView.m */,
-				C2D9E40915587D0C0041B291 /* uilazyimageview_reload.png */,
-				C2D9E40A15587D0C0041B291 /* uilazyimageview_reload@2x.png */,
-				C2D9E40B15587D0C0041B291 /* UILazyImageViewCache.h */,
-				C2D9E40C15587D0C0041B291 /* UILazyImageViewCache.m */,
 			);
 			path = UILazyImageView;
 			sourceTree = "<group>";
@@ -196,8 +185,6 @@
 				C2D9E3DD1557BD3B0041B291 /* InfoPlist.strings in Resources */,
 				C2D9E3E91557BD3B0041B291 /* ViewController.xib in Resources */,
 				C2D9E40115584DE50041B291 /* TableViewController.xib in Resources */,
-				C2D9E40E15587D0C0041B291 /* uilazyimageview_reload.png in Resources */,
-				C2D9E40F15587D0C0041B291 /* uilazyimageview_reload@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,7 +201,6 @@
 				C2D9E40015584DE50041B291 /* TableViewController.m in Sources */,
 				C2D9E405155877050041B291 /* NSData+HashMD5.m in Sources */,
 				C2D9E40D15587D0C0041B291 /* UILazyImageView.m in Sources */,
-				C2D9E41015587D0C0041B291 /* UILazyImageViewCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +314,7 @@
 				C2D9E3F11557BD3B0041B291 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

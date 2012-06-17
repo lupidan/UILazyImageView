@@ -37,7 +37,7 @@
 
 - (void) viewDidLoad{
     [super viewDidLoad];
-    self.arrayOfImageURL = [NSArray arrayWithObjects:@"http://www.beach-backgrounds.com/sunset-images/good-evening-ocean-side-beach-background-1920x1200.jpg",
+    self.arrayOfImageURL = [NSArray arrayWithObjects:@"http://www.wallpapersfreebackgrounds.com/uploads/island-beautiful-beach-background-images-wallpapers_for_desktop.jpg",
                             @"http://www.macwallpapers.eu/bulkupload//Trv/afric/3//Africa/Mac%20Tourism%20Background%20Zanzibar%20Beach.jpg",
                             @"http://www.free-desktop-backgrounds.net/free-desktop-wallpapers-backgrounds/free-hd-desktop-wallpapers-backgrounds/619840535.jpg",
                             @"http://www.pptbackgrounds.net/uploads/haena-beach-kauai-hawaii-backgrounds-wallpapers.jpg",

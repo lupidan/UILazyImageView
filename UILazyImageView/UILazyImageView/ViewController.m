@@ -47,7 +47,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [lazyImageView setImageURL:[NSURL URLWithString:@"http://www.beach-backgrounds.com/sunset-images/good-evening-ocean-side-beach-background-1920x1200.jpg"]];
+    [lazyImageView setImageURL:[NSURL URLWithString:@"http://www.wallpapersfreebackgrounds.com/uploads/island-beautiful-beach-background-images-wallpapers_for_desktop.jpg"]];
     [super viewWillAppear:animated];
 }
 
@@ -81,7 +81,7 @@
     [super dealloc];
 }
 - (IBAction)button1Pressed:(id)sender {
-    [lazyImageView setImageURL:[NSURL URLWithString:@"http://www.beach-backgrounds.com/sunset-images/good-evening-ocean-side-beach-background-1920x1200.jpg"]];
+    [lazyImageView setImageURL:[NSURL URLWithString:@"http://www.wallpapersfreebackgrounds.com/uploads/island-beautiful-beach-background-images-wallpapers_for_desktop.jpg"]];
 }
 
 - (IBAction)button2Pressed:(id)sender {
